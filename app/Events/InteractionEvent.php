@@ -20,7 +20,7 @@ class InteractionEvent
     {
         $this->userId =$request->user()->id;        
         $this->serviceName = $request->method();
-        $this->request =  $request->all();
+        $this->request =  $request;
         $this->responseCode = $response->status();
         $this->responseData = $response;
         $this->ip = RequestIp::ip();

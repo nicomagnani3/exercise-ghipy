@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\InteractionEvent;
 use App\Models\Gif;
 use Illuminate\Http\Request;
 use App\Services\GiphyService;
 use App\Http\Resources\Gif as GifResource;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
-
 use Illuminate\Support\Facades\Validator;
-class UsersController extends Controller
+class GifController extends Controller
 {
     protected $giphyService;
 
@@ -40,20 +37,10 @@ class UsersController extends Controller
         return  $this->giphyService->search(array_filter($params));
     }
 
-    public function show(Request $request)
+    public function show(Gif $gif)
     {
-        try {
-            $validator = Validator::make($request->all(), [
-                'id' => 'required|numeric',
-    
-            ]);
-            if ($validator->fails()){
-                return response(['errors'=>$validator->errors()->all()], 422);
-            }
-
-            $gif = Gif::findOrFail($request->input('id'));
-            $gif->giphy_info= $this->giphyService->getId($gif->gif_id);
-           
+        try {            
+            $gif->giphy_info= $this->giphyService->getId($gif->gif_id);           
             return new GifResource($gif);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Gif not found'], 404);
@@ -78,6 +65,6 @@ class UsersController extends Controller
 
     public static function routes()
     {
-        Route::apiResource('gifs', UsersController::class)->except(['destroy', 'update'])->names('api.gifs');
+        Route::apiResource('gifs', GifController::class)->except(['destroy', 'update'])->names('api.gifs');
     }
 }
