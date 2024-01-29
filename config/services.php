@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'giphy' => [
+        'api_key' => env('GIPHY_API_KEY'),
+        'base_url'	=> env('GIPHY_BASE_URL') ? env('GIPHY_BASE_URL') : 'https://api.giphy.com/v1/',
+    ],
+
 ];
