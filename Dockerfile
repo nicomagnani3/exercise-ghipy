@@ -22,6 +22,7 @@ COPY .docker/php-fpm.conf /usr/local/etc/php-fpm.d/iutrace.conf
 RUN sed -i "s/user = www-data/user = $user/g" /usr/local/etc/php-fpm.d/www.conf && \
     sed -i "s/group = www-data/group = $user/g" /usr/local/etc/php-fpm.d/www.conf
     
+
 WORKDIR /var/www
 
 USER $user

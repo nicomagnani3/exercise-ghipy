@@ -53,7 +53,6 @@ class GifController extends Controller
             'gif_id' => 'required|string',
             'alias' => 'required|string',
             'user_id' => 'required|numeric',
-
         ]);
 
         if ($validator->fails()){
