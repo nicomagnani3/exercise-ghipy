@@ -23,6 +23,9 @@ Into:
 1.  configure .env
 1. `docker-compose up -d`
 1. `docker-compose exec app bash`.
-1. `Generate OAuth client within the container to operate on the API, using the command 'php artisan passport:client --password' 
+        Into bash execute:  `php artisan migrate `
+                            `php artisan db:seed `
+1.      Generate OAuth client within the container to operate on the API, using the command `php artisan passport:client --password`
+                            `php artisan config:cache`
 1. Use endpoints 
 1.user: admin@admin.com passwd: admin1234
