@@ -1,8 +1,18 @@
 Exercise Giphy
 
+## Documentation
+it's located in /Documentation
+Into:
+    -gif_collection.json (is collection postman for use endpoints and examples)
+    -Diagram Entity-relation  https://drive.google.com/file/d/1DJr8z42Hg3Dpeo5CJsrp0L8rFY7odEC_/view?usp=sharing
+    -Diagram of sequence https://drive.google.com/file/d/1jvmZyE5hQ--ARkZBqDo_eoG1Jhkcu9Fq/view?usp=sharing
+    -Use Cases https://drive.google.com/file/d/13lyhcOc92Ijc4f0mvEbSeii3pQM6lxgk/view?usp=sharing
+
+
 ## Requirements
 - docker
 - docker-compose
+
 
 
 ## Setup

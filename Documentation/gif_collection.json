@@ -1,0 +1,345 @@
+{
+	"info": {
+		"_postman_id": "d453eaf8-86be-4a93-8b58-159b2cb62dc1",
+		"name": "GiF",
+		"description": "Collection to query the GIPHY endpoints\n\nLogin to log into the system,\n\nParams:  \n{\n\n\"grant_type\": \"password\",\n\n\"client_id\": ,\n\n\"client_secret\": \"\",\n\n\"username\": \"admin@admin\",\n\n\"password\": \"admin1234\" ,\n\n\"scope\": \"\\*\"\n\n}\n\nshould be the ones obtained from the system.\n\nSearch:\n\nSearch in GiPHY\n\nParams:\n\n{  \n\"query\": , //required  \n\"limit\": , //optional  \n\"offset\": , //optional  \n}\n\nSearchId\n\nFind GiF in system for id\n\nStore:\n\nStore in symstem one GIF\n\nParams:\n\n{\n\n\"gif_id\":\"\", //required\n\n\"alias\":, //required\n\n\"user_id\": //required\n\n}",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13423086"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"token\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"grant_type\": \"password\",\n    \"client_id\": 3,\n    \"client_secret\": \"mixSpahO2xerbSsp3TcuyQfai3MUEMQNLgcMogRE\",\n    \"username\": \"admin@admin\",\n    \"password\": \"admin1234\" ,\n    \"scope\": \"*\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				},
+				"description": "# Login\n\n**Description:** This endpoint is used to authenticate into the system and obtain an access token.\n\n**HTTP Method:** POST\n\n**Successful Response (Example):**\n\n```\n{\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 1800,\n  \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImJjMTk1...\"\n}\n\n```"
+			},
+			"response": [
+				{
+					"name": "Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"grant_type\": \"password\",\n    \"client_id\": 3,\n    \"client_secret\": \"mixSpahO2xerbSsp3TcuyQfai3MUEMQNLgcMogRE\",\n    \"username\": \"admin@admin\",\n    \"password\": \"admin1234\" ,\n    \"scope\": \"*\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/oauth/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": \"cat\",\n    \"offset\":1,\n    \"limit\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/gifs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"gifs"
+					]
+				},
+				"description": "# Search\n\n**Description:** This endpoint is used to search gifs in service external GIPHY\n\n**HTTP Method:** GET\n\n**Successful Response (Example):**\n\n```\n{\n  \"data\": \"JSON\",\n  \n}\n\n```"
+			},
+			"response": [
+				{
+					"name": "Search",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"cat\",\n    \"offset\":1,\n    \"limit\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "SearchId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost/api/gifs/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"gifs",
+						"1"
+					]
+				},
+				"description": "# Searchid\n\n**Description:** This endpoint is used to search gifs one gif for id in system local\n\n**HTTP Method:** GET\n\n**Successful Response (Example):**\n\n```\n{\n  \"data\": \"JSON\",\n}\n\n```"
+			},
+			"response": [
+				{
+					"name": "SearchId",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/gifs/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"gifs",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Store",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"gif_id\":\"KztT2c4u8mYYUiMKdJ\",\n    \"alias\":\"cats\",\n    \"user_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/gifs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"gifs"
+					]
+				},
+				"description": "# Store\n\n**Description:** This endpoint is used to store ones one gif in system\n\n**HTTP Method:** POST"
+			},
+			"response": [
+				{
+					"name": "Store",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gif_id\":\"KztT2c4u8mYYUiMKdJ\",\n    \"alias\":\"cats\",\n    \"user_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/gifs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"gifs"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
